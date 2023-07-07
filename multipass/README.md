@@ -20,3 +20,28 @@ ssh_authorized_keys:
 multipass ls
 ssh ubuntu@{{ip}}
 ```
+
+ssh {{name}} で接続できるよう設定
+cloud-init.yml で avahi-daemon をインストール
+
+```
+ssh ubuntu@{{name}}.local
+
+# ssh/config に設定追加
+Host dev
+    HostName dev.local
+    User ubuntu
+```
+
+mount 設定
+```bash
+# HOME 配下にある sandbox をマウントする
+multipass mount ~/sandbox {{name}}:~/sandbox
+
+# 確認
+multipass info {{name}}
+
+# 解除
+multipass umount {{name}}
+```
+
